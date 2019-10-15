@@ -27,9 +27,8 @@ bool Converter<gfx::Image>::FromV8(v8::Isolate* isolate,
   if (val->IsNull())
     return true;
 
-  // TODO(deermichel): remove mate:: after dropping mate
-  mate::Handle<electron::api::NativeImage> native_image;
-  if (!mate::ConvertFromV8(isolate, val, &native_image))
+  electron::api::NativeImage* native_image;
+  if (!gin::ConvertFromV8(isolate, val, &native_image))
     return false;
 
   *out = native_image->image();
